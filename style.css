@@ -4,24 +4,140 @@
   --hud: #b0b0ff;
   --font: "Press Start 2P", monospace;
 }
+
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; background: var(--bg); font-family: var(--font); color: #fff; }
-canvas { image-rendering: pixelated; display: block; margin: 0 auto; border: 2px solid var(--neon); border-radius: 8px; box-shadow: 0 0 20px 5px rgba(111,66,255,0.6); background: black; }
-#hud { position: absolute; top: 10px; left: 10px; color: var(--hud); font-size: 10px; }
-#controlsNote { font-size: 8px; color: #a8a8c8; margin-top: 6px; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  font-family: var(--font);
+  color: #fff;
+}
+
+canvas {
+  image-rendering: pixelated;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid var(--neon);
+  border-radius: 8px;
+  box-shadow: 0 0 20px 5px rgba(111,66,255,0.6);
+  background: black;
+}
+
+/* === HUD === */
+#hud {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: var(--hud);
+  font-size: 10px;
+}
+#controlsNote {
+  font-size: 8px;
+  color: #a8a8c8;
+  margin-top: 6px;
+}
+
+/* === MENUS === */
 .overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.9);
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  text-align: center; z-index: 10; padding: 20px;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+  padding: 20px;
 }
 .hidden { display: none; }
-h1 { color: var(--neon); text-shadow: 0 0 20px var(--neon); margin-bottom: 12px; }
-.muted { color: #b0b0ff; font-size: 12px; margin: 8px 0 20px; }
-.btn { background: var(--neon); border: none; color: #000; padding: 10px 20px; margin: 6px; font-weight: bold; border-radius: 8px; cursor: pointer; }
-.btn.ghost { background: transparent; border: 1px solid var(--neon); color: var(--neon); }
-#scoresList { list-style: none; padding: 0; margin: 10px 0; }
-#scoresList li { font-size: 12px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
+h1 {
+  color: var(--neon);
+  text-shadow: 0 0 20px var(--neon);
+  margin-bottom: 12px;
+}
+.muted {
+  color: #b0b0ff;
+  font-size: 12px;
+  margin: 8px 0 20px;
+}
 
+.btn {
+  background: var(--neon);
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  margin: 6px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px 3px rgba(111,66,255,0.6);
+}
+.btn.ghost {
+  background: transparent;
+  border: 1px solid var(--neon);
+  color: var(--neon);
+}
 
+#scoresList {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+#scoresList li {
+  font-size: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
 
+/* === MOBILE TOUCH CONTROLS === */
+#mobile-controls {
+  position: fixed;
+  bottom: 6vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 20;
+}
+
+.control-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.ctrl-btn {
+  width: 60px;
+  height: 60px;
+  background: rgba(111, 66, 255, 0.15);
+  border: 2px solid rgba(180, 160, 255, 0.3);
+  color: #fff;
+  font-size: 22px;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  transition: all 0.2s ease;
+  font-family: var(--font);
+}
+
+.ctrl-btn:active {
+  background: rgba(180, 140, 255, 0.4);
+  transform: scale(0.95);
+  box-shadow: 0 0 10px 3px rgba(150,100,255,0.6);
+}
+
+/* hide on desktop */
+@media (min-width: 768px) {
+  #mobile-controls {
+    display: none;
+  }
+}
