@@ -1,5 +1,5 @@
-// === THE COIL: Human Breath Grid Edition ===
-// The grid breathes like it's alive. Minimal glow, longer rhythm. Pure cyber calm.
+// === THE COIL: Human Breath Grid Edition (Mobile Swipe Enabled) ===
+// The grid breathes. The rhythm flows. Works on both keyboard and swipes.
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -28,7 +28,7 @@ let pausedFlag = false;
 let obstacles = [];
 let difficultyLevel = 0;
 
-let gridGlow = 0.08; // faint starting glow
+let gridGlow = 0.08;
 let glowDir = 1;
 let beatFlash = 0;
 let dropPulse = 0;
@@ -207,42 +207,15 @@ document.addEventListener("keydown", e => {
   if (bgm.paused) bgm.play().catch(() => {});
 });
 
-// === TOUCH CONTROL SUPPORT ===
-function setupTouchControls() {
-  const up = document.getElementById("up");
-  const down = document.getElementById("down");
-  const left = document.getElementById("left");
-  const right = document.getElementById("right");
-
-  if (!up || !down || !left || !right) return;
-
-  up.addEventListener("touchstart", () => {
-    if (velocity.y === 0) nextDir = { x: 0, y: -1 };
-  });
-  down.addEventListener("touchstart", () => {
-    if (velocity.y === 0) nextDir = { x: 0, y: 1 };
-  });
-  left.addEventListener("touchstart", () => {
-    if (velocity.x === 0) nextDir = { x: -1, y: 0 };
-  });
-  right.addEventListener("touchstart", () => {
-    if (velocity.x === 0) nextDir = { x: 1, y: 0 };
-  });
-}
-
-// === SWIPE CONTROLS ===
-let touchStartX = 0;
-let touchStartY = 0;
-let touchEndX = 0;
-let touchEndY = 0;
+// === SWIPE CONTROLS (MOBILE) ===
+let touchStartX = 0, touchStartY = 0, touchEndX = 0, touchEndY = 0;
 
 function handleSwipe() {
   const dx = touchEndX - touchStartX;
   const dy = touchEndY - touchStartY;
   const absX = Math.abs(dx);
   const absY = Math.abs(dy);
-
-  if (Math.max(absX, absY) < 30) return; // ignore small moves
+  if (Math.max(absX, absY) < 25) return;
 
   if (absX > absY) {
     if (dx > 0 && velocity.x === 0) nextDir = { x: 1, y: 0 };
@@ -253,24 +226,27 @@ function handleSwipe() {
   }
 }
 
-canvas.addEventListener("touchstart", e => {
+["touchstart", "touchmove", "touchend"].forEach(evt =>
+  document.body.addEventListener(evt, e => e.preventDefault(), { passive: false })
+);
+
+document.addEventListener("touchstart", e => {
   const touch = e.touches[0];
   touchStartX = touch.clientX;
   touchStartY = touch.clientY;
 });
-canvas.addEventListener("touchmove", e => {
+document.addEventListener("touchmove", e => {
   const touch = e.touches[0];
   touchEndX = touch.clientX;
   touchEndY = touch.clientY;
 });
-canvas.addEventListener("touchend", handleSwipe);
+document.addEventListener("touchend", handleSwipe);
 
 // === CONTROL ===
 function resetGame() {
   saveScore(score);
   initGame();
 }
-
 function togglePause() {
   pausedFlag = !pausedFlag;
   paused.classList.toggle("hidden", !pausedFlag);
@@ -325,6 +301,4 @@ function loop() {
   requestAnimationFrame(loop);
 }
 initGame();
-setupTouchControls();
 loop();
-
