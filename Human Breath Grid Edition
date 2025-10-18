@@ -194,6 +194,15 @@ let keyMap = {
   right: ["arrowright", "c"]
 };
 
+// === INPUT: Keyboard + Mobile Swipe ===
+let keyMap = {
+  up: ["arrowup", "d"],
+  down: ["arrowdown", "x"],
+  left: ["arrowleft", "z"],
+  right: ["arrowright", "c"]
+};
+
+// keyboard
 document.addEventListener("keydown", e => {
   const k = e.key.toLowerCase();
   if (k === "p") return togglePause();
@@ -207,40 +216,43 @@ document.addEventListener("keydown", e => {
   if (bgm.paused) bgm.play().catch(() => {});
 });
 
-// === SWIPE CONTROLS (MOBILE) ===
-let touchStartX = 0, touchStartY = 0, touchEndX = 0, touchEndY = 0;
+// === UNIVERSAL SWIPE CONTROLS (Fix for Mobile Browsers) ===
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
 
-function handleSwipe() {
-  const dx = touchEndX - touchStartX;
-  const dy = touchEndY - touchStartY;
-  const absX = Math.abs(dx);
-  const absY = Math.abs(dy);
-  if (Math.max(absX, absY) < 25) return;
-
-  if (absX > absY) {
-    if (dx > 0 && velocity.x === 0) nextDir = { x: 1, y: 0 };
-    else if (dx < 0 && velocity.x === 0) nextDir = { x: -1, y: 0 };
-  } else {
-    if (dy > 0 && velocity.y === 0) nextDir = { x: 0, y: 1 };
-    else if (dy < 0 && velocity.y === 0) nextDir = { x: 0, y: -1 };
-  }
-}
-
-["touchstart", "touchmove", "touchend"].forEach(evt =>
-  document.body.addEventListener(evt, e => e.preventDefault(), { passive: false })
-);
+// prevent scroll interference
+document.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
 
 document.addEventListener("touchstart", e => {
   const touch = e.touches[0];
   touchStartX = touch.clientX;
   touchStartY = touch.clientY;
 });
+
 document.addEventListener("touchmove", e => {
   const touch = e.touches[0];
   touchEndX = touch.clientX;
   touchEndY = touch.clientY;
 });
-document.addEventListener("touchend", handleSwipe);
+
+document.addEventListener("touchend", e => {
+  const dx = touchEndX - touchStartX;
+  const dy = touchEndY - touchStartY;
+  const absX = Math.abs(dx);
+  const absY = Math.abs(dy);
+
+  if (Math.max(absX, absY) < 20) return;
+
+  if (absX > absY) {
+    if (dx > 0 && velocity.x === 0) nextDir = { x: 1, y: 0 }; // right
+    else if (dx < 0 && velocity.x === 0) nextDir = { x: -1, y: 0 }; // left
+  } else {
+    if (dy > 0 && velocity.y === 0) nextDir = { x: 0, y: 1 }; // down
+    else if (dy < 0 && velocity.y === 0) nextDir = { x: 0, y: -1 }; // up
+  }
+});
 
 // === CONTROL ===
 function resetGame() {
