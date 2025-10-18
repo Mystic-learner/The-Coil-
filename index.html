@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Coil — Rhythm Snake</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="menu" class="overlay">
+    <h1>THE COIL</h1>
+    <p class="muted">One track. One beat. One chance.</p>
+    <button id="startBtn" class="btn">Start Game</button>
+    <button id="leaderBtn" class="btn ghost">Leaderboard</button>
+    <p class="hint">Press any key after start to enable audio.</p>
+  </div>
+
+  <div id="leaderboard" class="overlay hidden">
+    <h2>Leaderboard</h2>
+    <ol id="scoresList"></ol>
+    <div class="menu-actions">
+      <button id="clearScores" class="btn ghost">Clear</button>
+      <button id="backFromLeader" class="btn">Back</button>
+    </div>
+  </div>
+
+  <div id="paused" class="overlay hidden">
+    <h2>PAUSED</h2>
+    <p class="muted">Press P to resume</p>
+  </div>
+
+  <div id="gameWrap">
+    <canvas id="game" width="640" height="480"></canvas>
+    <div id="hud">
+      <div id="score">SCORE: 0</div>
+      <div id="combo">COMBO: 0</div>
+      <div id="controlsNote">Arrows or Z/D/X/C • P = Pause • R = Restart</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

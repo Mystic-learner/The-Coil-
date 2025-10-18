@@ -1,0 +1,27 @@
+:root {
+  --bg: #000;
+  --neon: #6f42ff;
+  --hud: #b0b0ff;
+  --font: "Press Start 2P", monospace;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; background: var(--bg); font-family: var(--font); color: #fff; }
+canvas { image-rendering: pixelated; display: block; margin: 0 auto; border: 2px solid var(--neon); border-radius: 8px; box-shadow: 0 0 20px 5px rgba(111,66,255,0.6); background: black; }
+#hud { position: absolute; top: 10px; left: 10px; color: var(--hud); font-size: 10px; }
+#controlsNote { font-size: 8px; color: #a8a8c8; margin-top: 6px; }
+.overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; z-index: 10; padding: 20px;
+}
+.hidden { display: none; }
+h1 { color: var(--neon); text-shadow: 0 0 20px var(--neon); margin-bottom: 12px; }
+.muted { color: #b0b0ff; font-size: 12px; margin: 8px 0 20px; }
+.btn { background: var(--neon); border: none; color: #000; padding: 10px 20px; margin: 6px; font-weight: bold; border-radius: 8px; cursor: pointer; }
+.btn.ghost { background: transparent; border: 1px solid var(--neon); color: var(--neon); }
+#scoresList { list-style: none; padding: 0; margin: 10px 0; }
+#scoresList li { font-size: 12px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+
+
+
