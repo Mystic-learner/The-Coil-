@@ -1,7 +1,8 @@
 # ⚡ THE-COIL- 
 > *A cyberpunk rhythm snake web game where beats decide your fate.*
 
-![banner](https://capsule-render.vercel.app/api?type=rect&color=7F00FF&height=100&section=header&text=THE%20COIL&fontColor=ffffff&fontSize=50&desc=Neon%20Rhythm%20Snake%20Web%20Game&descAlignY=70)
+![banner](https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0,7F00FF,2D00F7,00FFFF,7F00FF&height=180&text=THE%20COIL&fontColor=ffffff&fontSize=65&desc=Neon%20Rhythm%20Snake%20Web%20Game&descAlignY=75&animation=twinkling)
+
 
 ---
 
