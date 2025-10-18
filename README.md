@@ -50,6 +50,12 @@ Custom BGM supported — drop your `.mp3` file in the `assets/` folder and renam
 - **GitHub Pages** — deployment  
 
 ---
+## 🎮 Gameplay Screenshots  
+
+| Start | Play | Game Over |
+|-------|------|------------|
+| ![Start](assets/start.png) | ![Play](assets/play.png) | ![End](assets/end.png) |
+
 
 ## 🚀 How to Run Locally
 ```bash
